@@ -25,10 +25,9 @@ package co.aikar.taskchain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.PriorityQueue;
+import java.util.Queue;
+import java.util.concurrent.PriorityBlockingQueue;
 import java.util.concurrent.TimeUnit;
-
-import co.aikar.taskchain.TaskChainFactory;
 
 /**
  * Created by Martin on 31.10.2016.
@@ -41,7 +40,7 @@ public class MockScheduler {
     private boolean running;
     private Thread mainThread;
     private int currentTick = -1;
-    private PriorityQueue<Task> pending = new PriorityQueue<>(10, (o1, o2) -> (int) (o1.nextRun - o2.nextRun));
+    private Queue<Task> pending = new PriorityBlockingQueue<>(10, (o1, o2) -> (int) (o1.nextRun - o2.nextRun));
     
     public MockScheduler() {
         this.shutdownHandlers = new ArrayList<>();
